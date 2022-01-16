@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nearbyStationFragment">
+
+    <fragment
+        android:id="@+id/nearbyStationFragment"
+        android:name="com.jeanbernuy.citymapper.presentation.NearbyStationFragment"
+        android:label="fragment_nearby_station"
+        tools:layout="@layout/fragment_nearby_station" >
+        <action
+            android:id="@+id/action_nearbyStationFragment_to_lineDetailFragment"
+            app:destination="@id/lineDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/lineDetailFragment"
+        android:name="com.jeanbernuy.citymapper.presentation.LineDetailFragment"
+        android:label="fragment_line_detail"
+        tools:layout="@layout/fragment_line_detail" />
+</navigation>
