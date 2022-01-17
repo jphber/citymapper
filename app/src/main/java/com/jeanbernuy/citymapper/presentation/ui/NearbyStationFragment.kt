@@ -8,10 +8,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeanbernuy.citymapper.core.Resource
 import com.jeanbernuy.citymapper.data.DataSource
 import com.jeanbernuy.citymapper.data.repository.StopPointDataRepository
 import com.jeanbernuy.citymapper.databinding.FragmentNearbyStationBinding
+import com.jeanbernuy.citymapper.presentation.ui.adapters.StopPointAdapter
 import com.jeanbernuy.citymapper.presentation.viewmodels.NearbyStationViewModel
 import com.jeanbernuy.citymapper.presentation.viewmodels.VMFactory
 
@@ -47,10 +50,13 @@ class NearbyStationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViews()
         viewModel.fetchAllStopPoints.observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "${result.data}", Toast.LENGTH_LONG).show()
+                    binding.progressBar.visibility = View.GONE
+                    binding.rvStopPoints.adapter =
+                        StopPointAdapter(requireContext(), result.data.stopPoints)
                 }
                 is Resource.Failure -> {
                     Toast.makeText(requireContext(), "Error on server...", Toast.LENGTH_LONG).show()
@@ -60,5 +66,15 @@ class NearbyStationFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun setupViews() {
+        binding.rvStopPoints.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvStopPoints.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                DividerItemDecoration.VERTICAL
+            )
+        )
     }
 }
