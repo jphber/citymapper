@@ -8,6 +8,6 @@ interface StopPointRepository {
         latitude: Double,
         longitude: Double,
         stopTypes: String,
-        radius: Integer
+        radius: Int
     ): Resource<StopPoint>
 }

@@ -7,7 +7,7 @@ import com.jeanbernuy.citymapper.domain.StopPointRepository
 
 class StopPointDataRepository(private val dataSource: DataSource) : StopPointRepository {
     override suspend fun fetchStopPoints(
-        latitude: Double, longitude: Double, stopTypes: String, radius: Integer
+        latitude: Double, longitude: Double, stopTypes: String, radius: Int
     ): Resource<StopPoint> {
         return dataSource.fetchAllStopPoints(latitude, longitude, stopTypes, radius)
     }

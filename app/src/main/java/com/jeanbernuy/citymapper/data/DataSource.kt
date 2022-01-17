@@ -10,7 +10,7 @@ class DataSource {
         latitude: Double,
         longitude: Double,
         stopTypes: String,
-        radius: Integer
+        radius: Int
     ): Resource<StopPoint> {
         return Resource.Success(
             RestEngine.restEngine.getStopPoints(

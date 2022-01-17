@@ -10,6 +10,6 @@ interface WebService {
         @Query(value = "lat") latitude: Number,
         @Query(value = "lon") longitude: Number,
         @Query(value = "stopTypes") stopTypes: String,
-        @Query(value = "radius") radius: Integer,
+        @Query(value = "radius") radius: Int,
     ): StopPoint
 }

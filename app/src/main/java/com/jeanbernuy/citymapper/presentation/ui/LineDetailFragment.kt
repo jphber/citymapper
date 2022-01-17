@@ -1,20 +1,20 @@
-package com.jeanbernuy.citymapper.presentation
+package com.jeanbernuy.citymapper.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jeanbernuy.citymapper.databinding.FragmentNearbyStationBinding
+import com.jeanbernuy.citymapper.databinding.FragmentLineDetailBinding
 
 /**
  * A simple [Fragment] subclass.
- * Use the [NearbyStationFragment]
+ * Use the [LineDetailFragment]
  * created by: Jean Bernuy
  */
-class NearbyStationFragment : Fragment() {
+class LineDetailFragment : Fragment() {
 
-    private var _binding: FragmentNearbyStationBinding? = null
+    private var _binding: FragmentLineDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,8 @@ class NearbyStationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentNearbyStationBinding.inflate(inflater, container, false)
+        _binding = FragmentLineDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 }

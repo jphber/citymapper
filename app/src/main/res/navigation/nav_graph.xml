@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nearbyStationFragment"
-        android:name="com.jeanbernuy.citymapper.presentation.NearbyStationFragment"
+        android:name="com.jeanbernuy.citymapper.presentation.ui.NearbyStationFragment"
         android:label="fragment_nearby_station"
         tools:layout="@layout/fragment_nearby_station" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/lineDetailFragment"
-        android:name="com.jeanbernuy.citymapper.presentation.LineDetailFragment"
+        android:name="com.jeanbernuy.citymapper.presentation.ui.LineDetailFragment"
         android:label="fragment_line_detail"
         tools:layout="@layout/fragment_line_detail" />
 </navigation>
