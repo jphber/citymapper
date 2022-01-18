@@ -2,6 +2,7 @@ package com.jeanbernuy.citymapper.data.repository
 
 import com.jeanbernuy.citymapper.core.Resource
 import com.jeanbernuy.citymapper.data.DataSource
+import com.jeanbernuy.citymapper.data.model.Arrivals
 import com.jeanbernuy.citymapper.data.model.StopPoint
 import com.jeanbernuy.citymapper.domain.StopPointRepository
 
@@ -11,4 +12,9 @@ class StopPointDataRepository(private val dataSource: DataSource) : StopPointRep
     ): Resource<StopPoint> {
         return dataSource.fetchAllStopPoints(latitude, longitude, stopTypes, radius)
     }
+
+    override suspend fun fetchListArrivalPredictions(id:String): Resource<Arrivals> {
+       return dataSource.fetchArrivalsPredictions(id)
+    }
+
 }

@@ -8,15 +8,20 @@
     <fragment
         android:id="@+id/nearbyStationFragment"
         android:name="com.jeanbernuy.citymapper.presentation.ui.NearbyStationFragment"
-        android:label="fragment_nearby_station"
-        tools:layout="@layout/fragment_nearby_station" >
+        android:label="CityMapper Nearby Stations"
+        tools:layout="@layout/fragment_nearby_station">
         <action
-            android:id="@+id/action_nearbyStationFragment_to_lineDetailFragment"
-            app:destination="@id/lineDetailFragment" />
+            android:id="@+id/action_nearbyStationFragment_to_arrivalTimeFragment"
+            app:destination="@id/arrivalTimeFragment" />
     </fragment>
     <fragment
         android:id="@+id/lineDetailFragment"
         android:name="com.jeanbernuy.citymapper.presentation.ui.LineDetailFragment"
         android:label="fragment_line_detail"
         tools:layout="@layout/fragment_line_detail" />
+    <fragment
+        android:id="@+id/arrivalTimeFragment"
+        android:name="com.jeanbernuy.citymapper.presentation.ui.ArrivalTimeFragment"
+        android:label="CityMapper Arrival Times"
+        tools:layout="@layout/fragment_arrival_time" />
 </navigation>

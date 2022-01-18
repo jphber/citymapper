@@ -23,4 +23,14 @@ class NearbyStationViewModel(private val repository: StopPointRepository) : View
             emit(Resource.Failure(e))
         }
     }
+
+    val fetchArrivalPredictions = liveData(Dispatchers.IO) {
+        try {
+            emit(
+                repository.fetchListArrivalPredictions("940GZZLUGPK")
+            )
+        } catch (e: Exception) {
+            emit(Resource.Failure(e))
+        }
+    }
 }

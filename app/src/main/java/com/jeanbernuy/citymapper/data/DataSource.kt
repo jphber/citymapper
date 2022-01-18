@@ -2,6 +2,7 @@ package com.jeanbernuy.citymapper.data
 
 import com.jeanbernuy.citymapper.core.Resource
 import com.jeanbernuy.citymapper.core.RestEngine
+import com.jeanbernuy.citymapper.data.model.Arrivals
 import com.jeanbernuy.citymapper.data.model.StopPoint
 
 class DataSource {
@@ -20,5 +21,9 @@ class DataSource {
                 radius
             )
         )
+    }
+
+    suspend fun fetchArrivalsPredictions(id: String): Resource<Arrivals>{
+        return Resource.Success(RestEngine.restEngine.getListArrivalPredictions(id))
     }
 }

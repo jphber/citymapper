@@ -10,8 +10,15 @@ import com.jeanbernuy.citymapper.databinding.ItemStopPointBinding
 
 class StopPointAdapter(
     private val context: Context,
-    private val stopPoints: ArrayList<StopPointItem>
+    private val stopPoints: ArrayList<StopPointItem>,
+    private val itemClickListener: OnStopPointClickListener
+
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
+
+    interface OnStopPointClickListener {
+        fun onStopPointSelected(item: StopPointItem)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val itemBinding = ItemStopPointBinding.inflate(LayoutInflater.from(context), parent, false)
         return StopPointViewHolder(itemBinding)
@@ -31,7 +38,9 @@ class StopPointAdapter(
         BaseViewHolder<StopPointItem>(binding.root) {
         override fun bind(item: StopPointItem, position: Int) = with(binding) {
             txtStopPointName.text = item.commonName
-            txtArrivalTimes.text = item.naptanId
+            binding.root.setOnClickListener {
+                itemClickListener.onStopPointSelected(item)
+            }
         }
 
     }
