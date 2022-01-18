@@ -12,9 +12,14 @@ import java.util.*
 
 class ArrivalTimesAdapter(
     private val context: Context,
-    private val arrivals: ArrayList<ArrivalsItem>
+    private val arrivals: ArrayList<ArrivalsItem>,
+    private val itemClickListener: OnArrivalTimeClickListener
 ) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
+
+    interface OnArrivalTimeClickListener {
+        fun onArrivalTimeSelected(item: ArrivalsItem)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val itemBinding =
@@ -39,6 +44,9 @@ class ArrivalTimesAdapter(
             txtLineName.text = item.lineName
             txtExpectedArrival.text = dateString
             txtDirection.text = item.direction
+            binding.root.setOnClickListener {
+                itemClickListener.onArrivalTimeSelected(item)
+            }
         }
 
     }

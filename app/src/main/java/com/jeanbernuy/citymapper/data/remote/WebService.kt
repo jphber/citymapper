@@ -1,6 +1,7 @@
 package com.jeanbernuy.citymapper.data.remote
 
 import com.jeanbernuy.citymapper.data.model.Arrivals
+import com.jeanbernuy.citymapper.data.model.Routes
 import com.jeanbernuy.citymapper.data.model.StopPoint
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,4 +19,7 @@ interface WebService {
 
     @GET("StopPoint/{id}/Arrivals")
     suspend fun getListArrivalPredictions(@Path("id") id: String): Arrivals
+
+    @GET("Line/{stationName}/Route/Sequence/{direction}")
+    suspend fun getAllValidRoutes(@Path("stationName") stationName: String, @Path("direction") direction: String): Routes
 }

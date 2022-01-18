@@ -17,8 +17,15 @@
     <fragment
         android:id="@+id/lineDetailFragment"
         android:name="com.jeanbernuy.citymapper.presentation.ui.LineDetailFragment"
-        android:label="fragment_line_detail"
-        tools:layout="@layout/fragment_line_detail" />
+        android:label="Routes"
+        tools:layout="@layout/fragment_line_detail">
+        <argument
+            android:name="stationName"
+            app:argType="string" />
+        <argument
+            android:name="direction"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/arrivalTimeFragment"
         android:name="com.jeanbernuy.citymapper.presentation.ui.ArrivalTimeFragment"
@@ -27,5 +34,8 @@
         <argument
             android:name="naptanId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_arrivalTimeFragment_to_lineDetailFragment"
+            app:destination="@id/lineDetailFragment" />
     </fragment>
 </navigation>

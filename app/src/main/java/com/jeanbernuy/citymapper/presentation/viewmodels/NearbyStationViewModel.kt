@@ -11,9 +11,7 @@ class NearbyStationViewModel(private val repository: StopPointRepository) : View
 
     fun fetchAllStopPoints(latitude:Double, longitude:Double, stopTypes:String, radius: Int) = liveData(Dispatchers.IO) {
         try {
-            emit(
-                repository.fetchStopPoints(latitude, longitude, stopTypes, radius)
-            )
+            emit(repository.fetchStopPoints(latitude, longitude, stopTypes, radius))
         } catch (e: Exception) {
             emit(Resource.Failure(e))
         }
@@ -21,9 +19,15 @@ class NearbyStationViewModel(private val repository: StopPointRepository) : View
 
     fun fetchArrivalPredictions(naptanId: String) = liveData(Dispatchers.IO) {
         try {
-            emit(
-                repository.fetchListArrivalPredictions(naptanId)
-            )
+            emit(repository.fetchListArrivalPredictions(naptanId))
+        } catch (e: Exception) {
+            emit(Resource.Failure(e))
+        }
+    }
+
+    fun fetchAllValidRoutes(stationName: String, direction: String) = liveData(Dispatchers.IO) {
+        try {
+            emit(repository.fetchAllValidRoutes(stationName, direction))
         } catch (e: Exception) {
             emit(Resource.Failure(e))
         }

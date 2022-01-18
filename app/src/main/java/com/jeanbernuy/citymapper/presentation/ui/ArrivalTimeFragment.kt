@@ -8,12 +8,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeanbernuy.citymapper.R
 import com.jeanbernuy.citymapper.core.Resource
 import com.jeanbernuy.citymapper.data.DataSource
+import com.jeanbernuy.citymapper.data.model.ArrivalsItem
 import com.jeanbernuy.citymapper.data.repository.StopPointDataRepository
 import com.jeanbernuy.citymapper.databinding.FragmentArrivalTimeBinding
 import com.jeanbernuy.citymapper.presentation.ui.adapters.ArrivalTimesAdapter
@@ -25,17 +27,10 @@ import com.jeanbernuy.citymapper.presentation.viewmodels.VMFactory
  * Use the [ArrivalTimeFragment]
  * created by: Jean Bernuy
  */
-class ArrivalTimeFragment : Fragment() {
+class ArrivalTimeFragment : Fragment(), ArrivalTimesAdapter.OnArrivalTimeClickListener {
 
-    private val viewModel by viewModels<NearbyStationViewModel> {
-        VMFactory(
-            StopPointDataRepository(
-                DataSource()
-            )
-        )
-    }
+    private val viewModel by viewModels<NearbyStationViewModel> { VMFactory(StopPointDataRepository(DataSource())) }
     private val args: ArrivalTimeFragmentArgs by navArgs()
-
     private var _binding: FragmentArrivalTimeBinding? = null
     private val binding get() = _binding!!
 
@@ -59,7 +54,7 @@ class ArrivalTimeFragment : Fragment() {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.rvArrivalTimes.adapter =
-                        ArrivalTimesAdapter(requireContext(), result.data)
+                        ArrivalTimesAdapter(requireContext(), result.data, this)
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE
@@ -83,6 +78,11 @@ class ArrivalTimeFragment : Fragment() {
                 DividerItemDecoration.VERTICAL
             )
         )
+    }
+
+    override fun onArrivalTimeSelected(item: ArrivalsItem) {
+        val action = ArrivalTimeFragmentDirections.actionArrivalTimeFragmentToLineDetailFragment(item.lineName!!,item.direction!!)
+        findNavController().navigate(action)
     }
 
 }
