@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeanbernuy.citymapper.R
+import com.jeanbernuy.citymapper.core.AppConstants
 import com.jeanbernuy.citymapper.core.Resource
 import com.jeanbernuy.citymapper.data.DataSource
 import com.jeanbernuy.citymapper.data.model.StopPointItem
@@ -54,7 +55,8 @@ class NearbyStationFragment : Fragment(), StopPointAdapter.OnStopPointClickListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
-        viewModel.fetchAllStopPoints.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.fetchAllStopPoints(AppConstants.LATITUDE, AppConstants.LONGITUDE, AppConstants.STOP_TYPES, AppConstants.RADIUS
+        ).observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
@@ -62,10 +64,10 @@ class NearbyStationFragment : Fragment(), StopPointAdapter.OnStopPointClickListe
                         StopPointAdapter(requireContext(), result.data.stopPoints, this)
                 }
                 is Resource.Failure -> {
-                    Toast.makeText(requireContext(), "Error on server...", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), R.string.error_message, Toast.LENGTH_LONG).show()
                 }
                 else -> {
-                    Toast.makeText(requireContext(), "Error on server...", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), R.string.try_again_message, Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -82,6 +84,7 @@ class NearbyStationFragment : Fragment(), StopPointAdapter.OnStopPointClickListe
     }
 
     override fun onStopPointSelected(item: StopPointItem) {
-        findNavController().navigate(R.id.action_nearbyStationFragment_to_arrivalTimeFragment)
+        val action = NearbyStationFragmentDirections.actionNearbyStationFragmentToArrivalTimeFragment(item.naptanId!!)
+        findNavController().navigate(action)
     }
 }

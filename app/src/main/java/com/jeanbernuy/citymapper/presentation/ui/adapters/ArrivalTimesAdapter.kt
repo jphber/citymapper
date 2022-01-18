@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jeanbernuy.citymapper.core.BaseViewHolder
+import com.jeanbernuy.citymapper.core.dateToString
 import com.jeanbernuy.citymapper.data.model.ArrivalsItem
 import com.jeanbernuy.citymapper.databinding.ItemArrivalTimeBinding
+import java.util.*
 
 class ArrivalTimesAdapter(
     private val context: Context,
@@ -22,7 +24,7 @@ class ArrivalTimesAdapter(
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         when (holder) {
-            is ArrivalTimeViewHolder -> holder.bind(arrivals[position],position)
+            is ArrivalTimeViewHolder -> holder.bind(arrivals[position], position)
         }
     }
 
@@ -33,9 +35,10 @@ class ArrivalTimesAdapter(
     inner class ArrivalTimeViewHolder(private val binding: ItemArrivalTimeBinding) :
         BaseViewHolder<ArrivalsItem>(binding.root) {
         override fun bind(item: ArrivalsItem, position: Int) = with(binding) {
-            txtLineName.text = "Central"
-            txtExpectedArrival.text = "20:30"
-            txtDirection.text = "inbound"
+            val dateString = dateToString(item.expectedArrival!!)
+            txtLineName.text = item.lineName
+            txtExpectedArrival.text = dateString
+            txtDirection.text = item.direction
         }
 
     }

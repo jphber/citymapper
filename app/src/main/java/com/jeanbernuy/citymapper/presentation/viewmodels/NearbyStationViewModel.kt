@@ -9,25 +9,20 @@ import kotlinx.coroutines.Dispatchers
 
 class NearbyStationViewModel(private val repository: StopPointRepository) : ViewModel() {
 
-    val fetchAllStopPoints = liveData(Dispatchers.IO) {
+    fun fetchAllStopPoints(latitude:Double, longitude:Double, stopTypes:String, radius: Int) = liveData(Dispatchers.IO) {
         try {
             emit(
-                repository.fetchStopPoints(
-                    AppConstants.LATITUDE,
-                    AppConstants.LONGITUDE,
-                    AppConstants.STOP_TYPES,
-                    AppConstants.RADIUS
-                )
+                repository.fetchStopPoints(latitude, longitude, stopTypes, radius)
             )
         } catch (e: Exception) {
             emit(Resource.Failure(e))
         }
     }
 
-    val fetchArrivalPredictions = liveData(Dispatchers.IO) {
+    fun fetchArrivalPredictions(naptanId: String) = liveData(Dispatchers.IO) {
         try {
             emit(
-                repository.fetchListArrivalPredictions("940GZZLUGPK")
+                repository.fetchListArrivalPredictions(naptanId)
             )
         } catch (e: Exception) {
             emit(Resource.Failure(e))

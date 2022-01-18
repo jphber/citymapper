@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeanbernuy.citymapper.R
@@ -33,6 +34,7 @@ class ArrivalTimeFragment : Fragment() {
             )
         )
     }
+    private val args: ArrivalTimeFragmentArgs by navArgs()
 
     private var _binding: FragmentArrivalTimeBinding? = null
     private val binding get() = _binding!!
@@ -52,7 +54,7 @@ class ArrivalTimeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
-        viewModel.fetchArrivalPredictions.observe(viewLifecycleOwner, Observer { result ->
+        viewModel.fetchArrivalPredictions(args.naptanId).observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE

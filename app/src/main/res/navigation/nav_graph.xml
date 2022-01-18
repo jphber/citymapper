@@ -23,5 +23,9 @@
         android:id="@+id/arrivalTimeFragment"
         android:name="com.jeanbernuy.citymapper.presentation.ui.ArrivalTimeFragment"
         android:label="CityMapper Arrival Times"
-        tools:layout="@layout/fragment_arrival_time" />
+        tools:layout="@layout/fragment_arrival_time" >
+        <argument
+            android:name="naptanId"
+            app:argType="string" />
+    </fragment>
 </navigation>
