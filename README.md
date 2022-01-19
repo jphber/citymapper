@@ -45,7 +45,7 @@ All the data is coming from the API.
 The first page displays nearby stations, when one of the items is clicked, it is supposed to show the arrival times for the next 3 trains at the station.
 The third page displays the line detail.
 
-| ![](screenshots/picture_1.png) | ![](screenshots/picture_2.png) |
+| ![](screenshots/picture_1.png) | ![](screenshots/picture_2.png) | ![](screenshots/picture_3.png) | 
 
 ## Notes
 
