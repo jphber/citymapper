@@ -9,11 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeanbernuy.citymapper.R
 import com.jeanbernuy.citymapper.core.Resource
 import com.jeanbernuy.citymapper.data.DataSource
+import com.jeanbernuy.citymapper.data.model.StopPointX
 import com.jeanbernuy.citymapper.data.repository.StopPointDataRepository
 import com.jeanbernuy.citymapper.databinding.FragmentLineDetailBinding
+import com.jeanbernuy.citymapper.presentation.ui.adapters.TimeLineAdapter
 import com.jeanbernuy.citymapper.presentation.viewmodels.NearbyStationViewModel
 import com.jeanbernuy.citymapper.presentation.viewmodels.VMFactory
 
@@ -43,19 +47,33 @@ class LineDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViews()
         viewModel.fetchAllValidRoutes(args.stationName,args.direction).observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), "${result.data}", Toast.LENGTH_LONG).show()
+                    val stopPoints = ArrayList<StopPointX>()
+                    for (stopPoint in result.data.stopPointSequences){
+                        for (item in stopPoint.stopPoint){
+                            stopPoints.add(item)
+                        }
+                    }
+                    binding.progressBar.visibility = View.GONE
+                    binding.rvRoutes.adapter = TimeLineAdapter(requireContext(),stopPoints)
                 }
                 is Resource.Failure -> {
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), R.string.error_message, Toast.LENGTH_LONG).show()
                 }
                 else -> {
+                    binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), R.string.try_again_message, Toast.LENGTH_LONG).show()
                 }
             }
         })
+    }
+
+    private fun setupViews() {
+        binding.rvRoutes.layoutManager = LinearLayoutManager(requireContext())
     }
 
 }

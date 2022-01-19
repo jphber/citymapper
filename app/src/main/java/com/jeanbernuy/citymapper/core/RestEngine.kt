@@ -5,11 +5,15 @@ import com.jeanbernuy.citymapper.core.AppConstants.APP_KEY
 import com.jeanbernuy.citymapper.core.AppConstants.BASE_URL
 import com.jeanbernuy.citymapper.data.remote.WebService
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RestEngine {
+
+    val interceptor = HttpLoggingInterceptor()
+    val logginInterceptor = interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
     val httpClient: OkHttpClient = OkHttpClient
         .Builder()
@@ -20,7 +24,7 @@ object RestEngine {
                     "$APP_KEY"
                 ).build()
             )
-        }
+        }.addInterceptor(logginInterceptor)
         .build()
 
     val restEngine by lazy {

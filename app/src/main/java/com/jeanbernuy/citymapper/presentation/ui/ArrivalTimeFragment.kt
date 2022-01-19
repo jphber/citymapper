@@ -54,7 +54,7 @@ class ArrivalTimeFragment : Fragment(), ArrivalTimesAdapter.OnArrivalTimeClickLi
                 is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
                     binding.rvArrivalTimes.adapter =
-                        ArrivalTimesAdapter(requireContext(), result.data, this)
+                        ArrivalTimesAdapter(requireContext(), result.data.take(3), this)
                 }
                 is Resource.Failure -> {
                     binding.progressBar.visibility = View.GONE

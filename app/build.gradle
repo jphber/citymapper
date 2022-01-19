@@ -59,4 +59,7 @@ dependencies {
     // KTX - ViewModel y LiveData
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+
+    //Timeline View
+    implementation 'com.github.vipulasri:timelineview:1.1.5'
 }

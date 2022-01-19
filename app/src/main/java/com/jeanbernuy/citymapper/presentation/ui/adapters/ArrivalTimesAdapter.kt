@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jeanbernuy.citymapper.core.BaseViewHolder
-import com.jeanbernuy.citymapper.core.dateToString
+import com.jeanbernuy.citymapper.core.utils.dateToString
 import com.jeanbernuy.citymapper.data.model.ArrivalsItem
 import com.jeanbernuy.citymapper.databinding.ItemArrivalTimeBinding
 import java.util.*
 
 class ArrivalTimesAdapter(
     private val context: Context,
-    private val arrivals: ArrayList<ArrivalsItem>,
+    private val arrivals: List<ArrivalsItem>,
     private val itemClickListener: OnArrivalTimeClickListener
 ) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {

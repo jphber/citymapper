@@ -1,4 +1,4 @@
-package com.jeanbernuy.citymapper.core
+package com.jeanbernuy.citymapper.core.utils
 
 import java.text.SimpleDateFormat
 

@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/lineDetailFragment"
         android:name="com.jeanbernuy.citymapper.presentation.ui.LineDetailFragment"
-        android:label="Routes"
+        android:label="Line Detail"
         tools:layout="@layout/fragment_line_detail">
         <argument
             android:name="stationName"
