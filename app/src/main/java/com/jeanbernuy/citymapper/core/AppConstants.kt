@@ -8,4 +8,8 @@ object AppConstants {
     const val LONGITUDE = -0.15366951233643397
     const val STOP_TYPES = "NaptanMetroStation"
     const val RADIUS = 600
+    const val REQUEST_CODE_LOCATION_PERMISSIONS = 21
+    const val DATA_PACKAGE = "package"
+    const val LONDON_CENTER_LONGITUDE = -0.118092
+    const val LONDON_CENTER_LATITUDE = 51.509865
 }

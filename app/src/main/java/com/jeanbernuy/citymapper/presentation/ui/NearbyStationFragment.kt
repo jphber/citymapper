@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jeanbernuy.citymapper.R
@@ -29,13 +30,8 @@ import com.jeanbernuy.citymapper.presentation.viewmodels.VMFactory
  */
 class NearbyStationFragment : Fragment(), StopPointAdapter.OnStopPointClickListener {
 
-    private val viewModel by viewModels<NearbyStationViewModel> {
-        VMFactory(
-            StopPointDataRepository(
-                DataSource()
-            )
-        )
-    }
+    private val viewModel by viewModels<NearbyStationViewModel> { VMFactory(StopPointDataRepository(DataSource())) }
+    private val args: NearbyStationFragmentArgs by navArgs()
 
     private var _binding: FragmentNearbyStationBinding? = null
     private val binding get() = _binding!!
@@ -55,7 +51,7 @@ class NearbyStationFragment : Fragment(), StopPointAdapter.OnStopPointClickListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
-        viewModel.fetchAllStopPoints(AppConstants.LATITUDE, AppConstants.LONGITUDE, AppConstants.STOP_TYPES, AppConstants.RADIUS
+        viewModel.fetchAllStopPoints(args.latitude.toDouble(), args.longitude.toDouble(), AppConstants.STOP_TYPES, AppConstants.RADIUS
         ).observe(viewLifecycleOwner, Observer { result ->
             when (result) {
                 is Resource.Success -> {

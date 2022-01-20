@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="try_again_message">Oops! Please try again...</string>
     <string name="error_message">Error connecting to server. please try again...</string>
+    <string name="permission_rationale">Permission Rationale</string>
+    <string name="permission_denied">Permission Denied</string>
+    <string name="settings">Settings</string>
 </resources>

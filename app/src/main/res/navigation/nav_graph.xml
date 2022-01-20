@@ -10,6 +10,10 @@
         android:name="com.jeanbernuy.citymapper.presentation.ui.NearbyStationFragment"
         android:label="CityMapper Nearby Stations"
         tools:layout="@layout/fragment_nearby_station">
+        <argument android:name="latitude"
+            app:argType="float" />
+        <argument android:name="longitude"
+            app:argType="float" />
         <action
             android:id="@+id/action_nearbyStationFragment_to_arrivalTimeFragment"
             app:destination="@id/arrivalTimeFragment" />
